@@ -1,7 +1,7 @@
 #include "LoRaWan_APP.h"
 #include "Arduino.h"
 
-// Define o pino de toque a ser usado. Usamos o pino 4, que corresponde ao Touch 0 no seu Heltec V3.
+// Define o pino de toque a ser usado. No caso o pino 4 corresponde ao Touch 0
 #define TOUCH_PIN 4
 
 #define RF_FREQUENCY 915000000 // Hz
@@ -10,12 +10,12 @@
 #define LORA_SPREADING_FACTOR 7 // [SF7..SF12]
 #define LORA_CODINGRATE 1 // [1: 4/5]
 #define LORA_PREAMBLE_LENGTH 8 // Same for Tx and Rx
-#define LORA_SYMBOL_TIMEOUT 0 // Symbols
+#define LORA_SYMBOL_TIMEOUT 0 // Simbolos
 #define LORA_FIX_LENGTH_PAYLOAD_ON false
 #define LORA_IQ_INVERSION_ON false
 
 #define RX_TIMEOUT_VALUE 1000
-#define BUFFER_SIZE 30 // Define the payload size here
+#define BUFFER_SIZE 30 
 
 char txpacket[BUFFER_SIZE];
 char rxpacket[BUFFER_SIZE];
@@ -28,7 +28,7 @@ bool lora_idle = true;
 
 // Variáveis para a função de toque
 bool touch_detected = false;
-int touch_threshold = 15; // Ajuste este valor. Um valor menor é mais sensível.
+int touch_threshold = 15; // Precisa ser um valor menor para o touch 0 funcionar melhor
 
 // Callback de recebimento de pacote
 void OnRxDone( uint8_t *payload, uint16_t size, int16_t rssi, int8_t snr );
