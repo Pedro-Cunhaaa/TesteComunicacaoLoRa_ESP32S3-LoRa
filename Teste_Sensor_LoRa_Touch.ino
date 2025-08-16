@@ -1,7 +1,6 @@
 #include "LoRaWan_APP.h"
 #include "Arduino.h"
 
-// Define o pino de toque que será usado. Usaremos o Touch 0, que corresponde ao GPIO4.
 #define TOUCH_PIN 4
 
 #define RF_FREQUENCY 915000000 // Hz
@@ -10,11 +9,11 @@
 #define LORA_SPREADING_FACTOR 7 // SF7
 #define LORA_CODINGRATE 1 // 4/5
 #define LORA_PREAMBLE_LENGTH 8 // Mesma para Tx e Rx
-#define LORA_SYMBOL_TIMEOUT 0 // Símbolos
+#define LORA_SYMBOL_TIMEOUT 0 // Simbolos
 #define LORA_FIX_LENGTH_PAYLOAD_ON false
 #define LORA_IQ_INVERSION_ON false
 #define RX_TIMEOUT_VALUE 1000
-#define BUFFER_SIZE 30 // Define o tamanho do payload
+#define BUFFER_SIZE 30 
 
 char txpacket[BUFFER_SIZE];
 char rxpacket[BUFFER_SIZE];
@@ -23,7 +22,7 @@ double txNumber;
 
 bool lora_idle=true;
 bool touch_detected = false;
-int touch_threshold = 40; // Ajuste este valor. Um valor menor é mais sensível.
+int touch_threshold = 40; // Valor de sensibilidade do pino touch
 
 static RadioEvents_t RadioEvents;
 void OnTxDone( void );
@@ -59,11 +58,11 @@ void loop() {
   if(lora_idle == true) {
     delay(1000);
     txNumber += 0.01;
-    sprintf(txpacket,"Hello world number %0.2f",txNumber); //start a package
+    sprintf(txpacket,"Hello world number %0.2f",txNumber); 
     
     Serial.printf("\r\nsending packet \"%s\" , length %d\r\n",txpacket, strlen(txpacket));
 
-    Radio.Send( (uint8_t *)txpacket, strlen(txpacket) ); //send the package out 
+    Radio.Send( (uint8_t *)txpacket, strlen(txpacket) ); 
     lora_idle = false;
   }
   Radio.IrqProcess( );
